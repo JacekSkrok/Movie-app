@@ -49,12 +49,16 @@ definitions:
       email:
         type: string
         description: User email address
+      status:
+        type: boolean
+        description: Account status
     required:
       - id
       - email
     example:
       id: 1
       email: 'uzytkownik@java-course-wsb.pl'
+      status: true
 
   AuthenticationRequest:
     type: object
@@ -82,6 +86,17 @@ definitions:
       last_name:
         type: string
         description: Actor last name
+      ratings:
+        type: array
+        items:
+          type: object
+          properties:
+            Movie_id:
+              type: integer
+              description: Movie id
+            Rate:
+              type: integer
+              description: Rate in movie
     required:
       - id
       - first_name
@@ -90,6 +105,11 @@ definitions:
       id: 1
       first_name: 'Jan'
       last_name: 'Nowak'
+      ratings:
+        - Movie_id: 1
+          Rate: 7
+        - Movie_id: 2
+          Rate: 5
 
   Movie:
     type: object
@@ -123,6 +143,11 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Actor'
+      comments:
+        type: array
+        items:
+          type: string
+          description: Comment content
     required:
       - id
       - title
@@ -274,6 +299,43 @@ definitions:
       year: '1977'
       director: 'George Lucas'
 
+  MovieActorRatingRequest:
+    type: object
+    properties:
+      movie_id:
+        type: integer
+        description: Movie involving actor to rate id
+      actor_id:
+        type: integer
+        description: Actor to rate
+      rating:
+        type: integer
+        description: My rate
+    required:
+      - movie_id
+      - actor_id
+      - rating
+    example:
+      movie_id: 1
+      actor_id: 1
+      rating: 10
+
+  MovieCommentRequest:
+    type: object
+    properties:
+      movie_id:
+        type: integer
+        description: Movie to comment id
+      comment:
+        type: String
+        description: My comment
+    required:
+      - movie_id
+      - comment
+    example:
+      movie_id: 1
+      comment: 'Great play'
+
 paths:
   /user:
     post:
@@ -319,6 +381,30 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AuthenticationRequest'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error, e.g. bad credentials data
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Logout user
+      operationId: putAuthenticate
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
         200:
           description: Success
@@ -528,3 +614,111 @@ paths:
           description: Server error, e.g. unexpeected application exception
           schema:
             $ref: '#/definitions/Error'
+
+  /movie/comment:
+    post:
+      summary: Comment movie.
+      operationId: postMovieComment
+      parameters:
+        - description: Movie comment.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MovieCommentRequest'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Movie'
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
+
+  /movie/{id}/actor/{id}/rate
+    post:
+      summary: Actor rating
+      operationId: postActorRate
+      parameters:
+        - description: Movie id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Actor id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Actor rate
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MovieActorRatingRequest'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Movie'
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
+
+  /user/{id}/account-status
+    put:
+      summary: Deactivating user
+      operationId: putAccountStatus
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - description: Movie id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Account status
+          in: path
+          name: status
+          required: true
+          type: boolean
+      responses:
+        204:
+          description: Success
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
+
