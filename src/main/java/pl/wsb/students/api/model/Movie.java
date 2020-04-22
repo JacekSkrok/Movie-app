@@ -17,9 +17,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import pl.wsb.students.api.model.Actor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
@@ -27,7 +25,7 @@ import javax.validation.constraints.*;
 /**
  * Movie
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-03-29T16:51:34.109Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-22T15:16:00.424Z")
 public class Movie   {
   @JsonProperty("id")
   private Integer id = null;
@@ -86,6 +84,9 @@ public class Movie   {
 
   @JsonProperty("actors")
   private List<Actor> actors = null;
+
+  @JsonProperty("comments")
+  private List<String> comments = null;
 
   public Movie id(Integer id) {
     this.id = id;
@@ -230,6 +231,33 @@ public class Movie   {
     this.actors = actors;
   }
 
+  public Movie comments(List<String> comments) {
+    this.comments = comments;
+    return this;
+  }
+
+  public Movie addCommentsItem(String commentsItem) {
+    if (this.comments == null) {
+      this.comments = new ArrayList<String>();
+    }
+    this.comments.add(commentsItem);
+    return this;
+  }
+
+  /**
+   * Get comments
+   * @return comments
+   **/
+  @JsonProperty("comments")
+  @ApiModelProperty(value = "")
+  public List<String> getComments() {
+    return comments;
+  }
+
+  public void setComments(List<String> comments) {
+    this.comments = comments;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -246,12 +274,13 @@ public class Movie   {
         Objects.equals(this.rating, movie.rating) &&
         Objects.equals(this.year, movie.year) &&
         Objects.equals(this.director, movie.director) &&
-        Objects.equals(this.actors, movie.actors);
+        Objects.equals(this.actors, movie.actors) &&
+        Objects.equals(this.comments, movie.comments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, genre, title, rating, year, director, actors);
+    return Objects.hash(id, genre, title, rating, year, director, actors, comments);
   }
 
 
@@ -267,6 +296,7 @@ public class Movie   {
     sb.append("    year: ").append(toIndentedString(year)).append("\n");
     sb.append("    director: ").append(toIndentedString(director)).append("\n");
     sb.append("    actors: ").append(toIndentedString(actors)).append("\n");
+    sb.append("    comments: ").append(toIndentedString(comments)).append("\n");
     sb.append("}");
     return sb.toString();
   }

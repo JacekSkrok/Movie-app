@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-
 package pl.wsb.students.api.model;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,7 +22,7 @@ import javax.validation.constraints.*;
 /**
  * Actor
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-03-29T16:51:34.109Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-22T15:16:00.424Z")
 public class Actor   {
   @JsonProperty("id")
   private Integer id = null;
@@ -32,6 +32,9 @@ public class Actor   {
 
   @JsonProperty("last_name")
   private String lastName = null;
+
+  @JsonProperty("ratings")
+  private List<ActorRatings> ratings = null;
 
   public Actor id(Integer id) {
     this.id = id;
@@ -93,6 +96,33 @@ public class Actor   {
     this.lastName = lastName;
   }
 
+  public Actor ratings(List<pl.wsb.students.api.model.ActorRatings> ratings) {
+    this.ratings = ratings;
+    return this;
+  }
+
+  public Actor addRatingsItem(pl.wsb.students.api.model.ActorRatings ratingsItem) {
+    if (this.ratings == null) {
+      this.ratings = new ArrayList<ActorRatings>();
+    }
+    this.ratings.add(ratingsItem);
+    return this;
+  }
+
+  /**
+   * Get ratings
+   * @return ratings
+   **/
+  @JsonProperty("ratings")
+  @ApiModelProperty(value = "")
+  public List<pl.wsb.students.api.model.ActorRatings> getRatings() {
+    return ratings;
+  }
+
+  public void setRatings(List<pl.wsb.students.api.model.ActorRatings> ratings) {
+    this.ratings = ratings;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -105,12 +135,13 @@ public class Actor   {
     Actor actor = (Actor) o;
     return Objects.equals(this.id, actor.id) &&
         Objects.equals(this.firstName, actor.firstName) &&
-        Objects.equals(this.lastName, actor.lastName);
+        Objects.equals(this.lastName, actor.lastName) &&
+        Objects.equals(this.ratings, actor.ratings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName);
+    return Objects.hash(id, firstName, lastName, ratings);
   }
 
 
@@ -122,6 +153,7 @@ public class Actor   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    ratings: ").append(toIndentedString(ratings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

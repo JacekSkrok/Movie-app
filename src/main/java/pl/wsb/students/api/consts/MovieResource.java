@@ -1,7 +1,9 @@
 package pl.wsb.students.api.consts;
 
-import io.swagger.model.MovieRatingRequest;
-import io.swagger.model.MovieRequest;
+import pl.wsb.students.api.model.ActorRatings;
+import pl.wsb.students.api.model.MovieCommentRequest;
+import pl.wsb.students.api.model.MovieRatingRequest;
+import pl.wsb.students.api.model.MovieRequest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,6 +32,18 @@ public class MovieResource {
     @Path(ApiEndpoints.MOVIE_RATE)
     public Response postMovieRate(MovieRatingRequest body) {
         return Response.status(Response.Status.OK).entity("mock call ok...").build();
+    }
+
+    @POST
+    @Path(ApiEndpoints.MOVIE_COMMENT)
+    public Response postMovieComment(ActorRatings body) {
+        return Response.status(Response.Status.OK).entity("dodano komentarz.").build();
+    }
+
+    @POST
+    @Path(ApiEndpoints.MOVIE_ACTOR_RATE)
+    public Response postActorRatings(ActorRatings body) {
+        return Response.status(Response.Status.OK).entity("dodano ocenę aktora.").build();
     }
 
     @PUT

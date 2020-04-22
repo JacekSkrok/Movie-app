@@ -11,25 +11,26 @@
  */
 
 
-package io.swagger.model;
+package pl.wsb.students.api.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-03-29T16:51:34.109Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-22T15:16:00.424Z")
 public class User   {
   @JsonProperty("id")
   private Integer id = null;
 
   @JsonProperty("email")
   private String email = null;
+
+  @JsonProperty("status")
+  private Boolean status = null;
 
   public User id(Integer id) {
     this.id = id;
@@ -71,6 +72,25 @@ public class User   {
     this.email = email;
   }
 
+  public User status(Boolean status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Account status
+   * @return status
+   **/
+  @JsonProperty("status")
+  @ApiModelProperty(value = "Account status")
+  public Boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -82,12 +102,13 @@ public class User   {
     }
     User user = (User) o;
     return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.email, user.email);
+        Objects.equals(this.email, user.email) &&
+        Objects.equals(this.status, user.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email);
+    return Objects.hash(id, email, status);
   }
 
 
@@ -98,6 +119,7 @@ public class User   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

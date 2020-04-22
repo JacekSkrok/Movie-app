@@ -1,6 +1,6 @@
 package pl.wsb.students.api.consts;
 
-import io.swagger.model.MovieLibraryRequest;
+import pl.wsb.students.api.model.MovieLibraryRequest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

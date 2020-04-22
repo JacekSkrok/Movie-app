@@ -11,20 +11,19 @@
  */
 
 
-package io.swagger.model;
+package pl.wsb.students.api.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
 /**
  * MovieLibraryRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-03-29T16:51:34.109Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-22T15:16:00.424Z")
 public class MovieLibraryRequest   {
   @JsonProperty("movie_id")
   private Integer movieId = null;

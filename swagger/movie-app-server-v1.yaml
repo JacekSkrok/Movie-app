@@ -327,7 +327,7 @@ definitions:
         type: integer
         description: Movie to comment id
       comment:
-        type: String
+        type: string
         description: My comment
     required:
       - movie_id
@@ -365,6 +365,25 @@ paths:
           description: Server error, e.g. unexpeected application exception
           schema:
             $ref: '#/definitions/Error'
+    put:
+      summary: Log out
+      description: putUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
+
 
   /authenticate:
     post:
@@ -644,46 +663,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /movie/{id}/actor/{id}/rate
-    post:
-      summary: Actor rating
-      operationId: postActorRate
-      parameters:
-        - description: Movie id
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: Actor id
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: Actor rate
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/MovieActorRatingRequest'
-      responses:
-        200:
-          description: Success
-          schema:
-            $ref: '#/definitions/Movie'
-        400:
-          description: Client error, e.g. unsifficient data
-          schema:
-            $ref: '#/definitions/Error'
-        401:
-          description: Unauthorized error
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Server error, e.g. unexpeected application exception
-          schema:
-            $ref: '#/definitions/Error'
-
-  /user/{id}/account-status
+  /user/{id}/account-status:
     put:
       summary: Deactivating user
       operationId: putAccountStatus
@@ -722,3 +702,41 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /movie/{id}/actor/{id1}/rate:
+    post:
+      summary: Actor rating
+      operationId: postActorRate
+      parameters:
+        - description: Movie id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Actor id
+          in: path
+          name: id1
+          required: true
+          type: integer
+        - description: Actor rate
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MovieActorRatingRequest'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Movie'
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
