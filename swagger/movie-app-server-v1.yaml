@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   title: Java Course Movie App API
   description: Sample Movie App AI
-  version: 1.0.0
+  version: 1.1.0
 host: api.wsb.pl
 schemes:
   - http
@@ -60,6 +60,23 @@ definitions:
       email: 'uzytkownik@java-course-wsb.pl'
       status: true
 
+  UserDeactivateRequest:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: User id
+      status:
+        type: boolean
+        description: Account status
+    required:
+      - id
+      - status
+    example:
+      id: 1
+      status: false
+
+
   AuthenticationRequest:
     type: object
     properties:
@@ -91,10 +108,9 @@ definitions:
         items:
           type: object
           properties:
-            Movie_id:
-              type: integer
-              description: Movie id
-            Rate:
+            movie:
+              $ref: '#/definitions/Movie'
+            rate:
               type: integer
               description: Rate in movie
     required:
@@ -366,15 +382,24 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
-      summary: Log out
-      description: putUser
+      summary: Deactivate user.
+      operationId: putUser
       consumes:
         - application/json
       produces:
         - application/json
+      parameters:
+        - description: Change user status
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserDeactivateRequest'
       responses:
         200:
-          description: OK
+          description: Success
+          schema:
+            $ref: '#/definitions/User'
         400:
           description: Client error, e.g. unsifficient data
           schema:
@@ -384,6 +409,26 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+
+  /user/logout:
+    post:
+      summary: Logout user.
+      operationId: postLogoutUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful logout
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
 
   /authenticate:
     post:
@@ -400,30 +445,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AuthenticationRequest'
-      responses:
-        200:
-          description: Success
-          schema:
-            $ref: '#/definitions/User'
-        400:
-          description: Client error, e.g. unsifficient data
-          schema:
-            $ref: '#/definitions/Error'
-        401:
-          description: Unauthorized error, e.g. bad credentials data
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Server error, e.g. unexpeected application exception
-          schema:
-            $ref: '#/definitions/Error'
-    put:
-      summary: Logout user
-      operationId: putAuthenticate
-      consumes:
-        - application/json
-      produces:
-        - application/json
       responses:
         200:
           description: Success
@@ -539,6 +560,74 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /movie/comment:
+    post:
+      summary: Comment movie.
+      operationId: postMovieComment
+      parameters:
+        - description: Movie comment.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MovieCommentRequest'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Movie'
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
+
+  /movie/{movie_id}/actor/{actor_id}/rate:
+    post:
+      summary: Rate actor
+      operationId: postActorRate
+      parameters:
+        - description: Movie id
+          in: path
+          name: movie_id
+          required: true
+          type: integer
+        - description: Actor id
+          in: path
+          name: actor_id
+          required: true
+          type: integer
+        - description: Actor rate
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MovieActorRatingRequest'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Movie'
+        400:
+          description: Client error, e.g. unsifficient data
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Server error, e.g. unexpeected application exception
+          schema:
+            $ref: '#/definitions/Error'
+
   /library:
     post:
       summary: Add movie to library.
@@ -627,113 +716,6 @@ paths:
             $ref: '#/definitions/Error'
         403:
           description: Forbidden error
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Server error, e.g. unexpeected application exception
-          schema:
-            $ref: '#/definitions/Error'
-
-  /movie/comment:
-    post:
-      summary: Comment movie.
-      operationId: postMovieComment
-      parameters:
-        - description: Movie comment.
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/MovieCommentRequest'
-      responses:
-        200:
-          description: Success
-          schema:
-            $ref: '#/definitions/Movie'
-        400:
-          description: Client error, e.g. unsifficient data
-          schema:
-            $ref: '#/definitions/Error'
-        401:
-          description: Unauthorized error
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Server error, e.g. unexpeected application exception
-          schema:
-            $ref: '#/definitions/Error'
-
-  /user/{id}/account-status:
-    put:
-      summary: Deactivating user
-      operationId: putAccountStatus
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - description: Movie id
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: Account status
-          in: path
-          name: status
-          required: true
-          type: boolean
-      responses:
-        204:
-          description: Success
-        400:
-          description: Client error, e.g. unsifficient data
-          schema:
-            $ref: '#/definitions/Error'
-        401:
-          description: Unauthorized error
-          schema:
-            $ref: '#/definitions/Error'
-        403:
-          description: Forbidden error
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Server error, e.g. unexpeected application exception
-          schema:
-            $ref: '#/definitions/Error'
-
-  /movie/{id}/actor/{id1}/rate:
-    post:
-      summary: Actor rating
-      operationId: postActorRate
-      parameters:
-        - description: Movie id
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: Actor id
-          in: path
-          name: id1
-          required: true
-          type: integer
-        - description: Actor rate
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/MovieActorRatingRequest'
-      responses:
-        200:
-          description: Success
-          schema:
-            $ref: '#/definitions/Movie'
-        400:
-          description: Client error, e.g. unsifficient data
-          schema:
-            $ref: '#/definitions/Error'
-        401:
-          description: Unauthorized error
           schema:
             $ref: '#/definitions/Error'
         500:

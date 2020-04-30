@@ -31,12 +31,12 @@ public class MovieResource {
     @POST
     @Path(ApiEndpoints.MOVIE_RATE)
     public Response postMovieRate(MovieRatingRequest body) {
-        return Response.status(Response.Status.OK).entity("mock call ok...").build();
+        return Response.status(Response.Status.OK).entity("dodano ocene filmu").build();
     }
 
     @POST
     @Path(ApiEndpoints.MOVIE_COMMENT)
-    public Response postMovieComment(ActorRatings body) {
+    public Response postMovieComment(MovieCommentRequest body) {
         return Response.status(Response.Status.OK).entity("dodano komentarz.").build();
     }
 

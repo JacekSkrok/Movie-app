@@ -19,54 +19,54 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
 /**
- * AuthenticationRequest
+ * MovieCommentRequest
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-30T07:31:54.867Z")
-public class AuthenticationRequest   {
-  @JsonProperty("email")
-  private String email = null;
+public class MovieCommentRequest   {
+  @JsonProperty("movie_id")
+  private Integer movieId = null;
 
-  @JsonProperty("password")
-  private String password = null;
+  @JsonProperty("comment")
+  private String comment = null;
 
-  public AuthenticationRequest email(String email) {
-    this.email = email;
+  public MovieCommentRequest movieId(Integer movieId) {
+    this.movieId = movieId;
     return this;
   }
 
   /**
-   * Get email
-   * @return email
+   * Movie to comment id
+   * @return movieId
    **/
-  @JsonProperty("email")
-  @ApiModelProperty(required = true, value = "")
+  @JsonProperty("movie_id")
+  @ApiModelProperty(required = true, value = "Movie to comment id")
   @NotNull
-  public String getEmail() {
-    return email;
+  public Integer getMovieId() {
+    return movieId;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setMovieId(Integer movieId) {
+    this.movieId = movieId;
   }
 
-  public AuthenticationRequest password(String password) {
-    this.password = password;
+  public MovieCommentRequest comment(String comment) {
+    this.comment = comment;
     return this;
   }
 
   /**
-   * Get password
-   * @return password
+   * My comment
+   * @return comment
    **/
-  @JsonProperty("password")
-  @ApiModelProperty(required = true, value = "")
+  @JsonProperty("comment")
+  @ApiModelProperty(required = true, value = "My comment")
   @NotNull
-  public String getPassword() {
-    return password;
+  public String getComment() {
+    return comment;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  public void setComment(String comment) {
+    this.comment = comment;
   }
 
 
@@ -78,24 +78,24 @@ public class AuthenticationRequest   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AuthenticationRequest authenticationRequest = (AuthenticationRequest) o;
-    return Objects.equals(this.email, authenticationRequest.email) &&
-        Objects.equals(this.password, authenticationRequest.password);
+    MovieCommentRequest movieCommentRequest = (MovieCommentRequest) o;
+    return Objects.equals(this.movieId, movieCommentRequest.movieId) &&
+        Objects.equals(this.comment, movieCommentRequest.comment);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, password);
+    return Objects.hash(movieId, comment);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AuthenticationRequest {\n");
+    sb.append("class MovieCommentRequest {\n");
     
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    password: ").append(toIndentedString(password)).append("\n");
+    sb.append("    movieId: ").append(toIndentedString(movieId)).append("\n");
+    sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
     sb.append("}");
     return sb.toString();
   }

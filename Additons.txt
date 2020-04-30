@@ -1,0 +1,84 @@
+US9
+Jako zalogowany wcześniej Użytkownik chciałbym móc wylogować się ze swojego konta po zakończeniu używania aplikacji w celu bezpiecznego zakończenia sesji.
+US10
+Jako Użytkownik chciałbym móc oceniać występy aktorów w poszczególnych filmach w celu wyrażenia swojego zdania na temat występu danego aktora w filmie
+US11
+Jako Użytkownik chciałbym móć dodawać komentarze do filmów w celu wyrażenia wyrażenia swojego zdania i podzielenia się opinią z innymi uczestnikami
+US12
+Jako Administrator chciałbym móc czasowo lub permanentnie dezaktywować konto Użytkownika w celu kontrolowania treści dodawanych przez Użytkowników.
+Wymaganie pozafunkcjonalne:
+System powinnien posiadać dwustopniową weryfikację użytkownika podczas rejestracji. Wysyłać link aktywacyjny na wskazany adres e-mail. Po kliknięciu przez użytkownika w link konto powinno zostać aktywowane, a wszystkie funkcje dostępne.
+
+Modele:
+US9(wylogowanie)
+Żadanie:
+Nie robimy modelu, operacja zostanie zrealizowana przy użyciu operacji POST bez parametrów
+Odpowiedź:
+Nie tworzymy modelu, odpowiedź zrealizowana zostanie kodem
+US10(ocena aktorów)
+Żadanie:
+MovieActorRatingRequest:
+  type: object
+    properties:
+      movie_id:
+        type: integer
+        description: Movie involving actor to rate id
+      actor_id:
+        type: integer
+        description: Actor to rate
+      rating:
+        type: integer
+        description: My rate
+    required:
+      - movie_id
+      - actor_id
+      - rating
+    example:
+      movie_id: 1
+      actor_id: 1
+      rating: 10
+Odpowiedź:
+Odpowiemy modelem Actor
+
+US11(komentarze)
+Żadanie:
+MovieCommentRequest:
+  type: object
+    properties:
+      movie_id:
+        type: integer
+        description: Movie to comment id
+      comment:
+        type: String
+        description: My comment
+    required:
+      - movie_id
+      - comment
+    example:
+    movie_id: 1
+    comment: 'Great play'
+Odpowiedź:
+Odpowiemy modelem Movie
+
+
+US12(Dezaktywacja użytkownika)
+Żadanie:
+  UserDeactivateRequest:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: User id
+      status:
+        type: boolean
+        description: Account status
+    required:
+      - id
+      - status
+    example:
+      id: 1
+      status: false
+Odpowiedz:
+Odpowiemy modelem User
+
+

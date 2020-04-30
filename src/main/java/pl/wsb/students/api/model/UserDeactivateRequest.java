@@ -19,54 +19,54 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
 /**
- * AuthenticationRequest
+ * UserDeactivateRequest
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-30T07:31:54.867Z")
-public class AuthenticationRequest   {
-  @JsonProperty("email")
-  private String email = null;
+public class UserDeactivateRequest   {
+  @JsonProperty("id")
+  private Integer id = null;
 
-  @JsonProperty("password")
-  private String password = null;
+  @JsonProperty("status")
+  private Boolean status = null;
 
-  public AuthenticationRequest email(String email) {
-    this.email = email;
+  public UserDeactivateRequest id(Integer id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get email
-   * @return email
+   * User id
+   * @return id
    **/
-  @JsonProperty("email")
-  @ApiModelProperty(required = true, value = "")
+  @JsonProperty("id")
+  @ApiModelProperty(required = true, value = "User id")
   @NotNull
-  public String getEmail() {
-    return email;
+  public Integer getId() {
+    return id;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
-  public AuthenticationRequest password(String password) {
-    this.password = password;
+  public UserDeactivateRequest status(Boolean status) {
+    this.status = status;
     return this;
   }
 
   /**
-   * Get password
-   * @return password
+   * Account status
+   * @return status
    **/
-  @JsonProperty("password")
-  @ApiModelProperty(required = true, value = "")
+  @JsonProperty("status")
+  @ApiModelProperty(required = true, value = "Account status")
   @NotNull
-  public String getPassword() {
-    return password;
+  public Boolean isStatus() {
+    return status;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  public void setStatus(Boolean status) {
+    this.status = status;
   }
 
 
@@ -78,24 +78,24 @@ public class AuthenticationRequest   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AuthenticationRequest authenticationRequest = (AuthenticationRequest) o;
-    return Objects.equals(this.email, authenticationRequest.email) &&
-        Objects.equals(this.password, authenticationRequest.password);
+    UserDeactivateRequest userDeactivateRequest = (UserDeactivateRequest) o;
+    return Objects.equals(this.id, userDeactivateRequest.id) &&
+        Objects.equals(this.status, userDeactivateRequest.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, password);
+    return Objects.hash(id, status);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AuthenticationRequest {\n");
+    sb.append("class UserDeactivateRequest {\n");
     
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    password: ").append(toIndentedString(password)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

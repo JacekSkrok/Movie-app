@@ -16,34 +16,54 @@ package pl.wsb.students.api.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.*;
 
 /**
- * Error
+ * ActorRatings
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-30T07:31:54.867Z")
-public class Error   {
-  @JsonProperty("message")
-  private String message = null;
+public class ActorRatings   {
+  @JsonProperty("movie")
+  private Movie movie = null;
 
-  public Error message(String message) {
-    this.message = message;
+  @JsonProperty("rate")
+  private Integer rate = null;
+
+  public ActorRatings movie(Movie movie) {
+    this.movie = movie;
     return this;
   }
 
   /**
-   * Error message
-   * @return message
+   * Get movie
+   * @return movie
    **/
-  @JsonProperty("message")
-  @ApiModelProperty(required = true, value = "Error message")
-  @NotNull
-  public String getMessage() {
-    return message;
+  @JsonProperty("movie")
+  @ApiModelProperty(value = "")
+  public Movie getMovie() {
+    return movie;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void setMovie(Movie movie) {
+    this.movie = movie;
+  }
+
+  public ActorRatings rate(Integer rate) {
+    this.rate = rate;
+    return this;
+  }
+
+  /**
+   * Rate in movie
+   * @return rate
+   **/
+  @JsonProperty("rate")
+  @ApiModelProperty(value = "Rate in movie")
+  public Integer getRate() {
+    return rate;
+  }
+
+  public void setRate(Integer rate) {
+    this.rate = rate;
   }
 
 
@@ -55,22 +75,24 @@ public class Error   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Error error = (Error) o;
-    return Objects.equals(this.message, error.message);
+    ActorRatings actorRatings = (ActorRatings) o;
+    return Objects.equals(this.movie, actorRatings.movie) &&
+        Objects.equals(this.rate, actorRatings.rate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(message);
+    return Objects.hash(movie, rate);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Error {\n");
+    sb.append("class ActorRatings {\n");
     
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    movie: ").append(toIndentedString(movie)).append("\n");
+    sb.append("    rate: ").append(toIndentedString(rate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,7 +1,7 @@
 package pl.wsb.students.api.consts;
 
-import pl.wsb.students.api.model.AuthenticationRequest;
 import pl.wsb.students.api.model.RegisterUserRequest;
+import pl.wsb.students.api.model.UserDeactivateRequest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -19,8 +19,15 @@ public class UserResources {
     }
 
     @PUT
-    public Response putUser(AuthenticationRequest body) {
+    public Response putUser(UserDeactivateRequest body) {
+        return Response.status(Response.Status.OK).entity("dezaktywowano").build();
+    }
+
+    @POST
+    @Path(ApiEndpoints.USER_LOGOUT)
+    public Response postUserLogout() {
         return Response.status(Response.Status.OK).entity("wylogowano").build();
     }
+
 
 }

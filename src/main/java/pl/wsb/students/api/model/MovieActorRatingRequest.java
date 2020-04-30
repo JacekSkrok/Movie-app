@@ -19,27 +19,30 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
 /**
- * MovieRatingRequest
+ * MovieActorRatingRequest
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-04-30T07:31:54.867Z")
-public class MovieRatingRequest   {
+public class MovieActorRatingRequest   {
   @JsonProperty("movie_id")
   private Integer movieId = null;
+
+  @JsonProperty("actor_id")
+  private Integer actorId = null;
 
   @JsonProperty("rating")
   private Integer rating = null;
 
-  public MovieRatingRequest movieId(Integer movieId) {
+  public MovieActorRatingRequest movieId(Integer movieId) {
     this.movieId = movieId;
     return this;
   }
 
   /**
-   * Movie to rate id
+   * Movie involving actor to rate id
    * @return movieId
    **/
   @JsonProperty("movie_id")
-  @ApiModelProperty(required = true, value = "Movie to rate id")
+  @ApiModelProperty(required = true, value = "Movie involving actor to rate id")
   @NotNull
   public Integer getMovieId() {
     return movieId;
@@ -49,7 +52,27 @@ public class MovieRatingRequest   {
     this.movieId = movieId;
   }
 
-  public MovieRatingRequest rating(Integer rating) {
+  public MovieActorRatingRequest actorId(Integer actorId) {
+    this.actorId = actorId;
+    return this;
+  }
+
+  /**
+   * Actor to rate
+   * @return actorId
+   **/
+  @JsonProperty("actor_id")
+  @ApiModelProperty(required = true, value = "Actor to rate")
+  @NotNull
+  public Integer getActorId() {
+    return actorId;
+  }
+
+  public void setActorId(Integer actorId) {
+    this.actorId = actorId;
+  }
+
+  public MovieActorRatingRequest rating(Integer rating) {
     this.rating = rating;
     return this;
   }
@@ -78,23 +101,25 @@ public class MovieRatingRequest   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MovieRatingRequest movieRatingRequest = (MovieRatingRequest) o;
-    return Objects.equals(this.movieId, movieRatingRequest.movieId) &&
-        Objects.equals(this.rating, movieRatingRequest.rating);
+    MovieActorRatingRequest movieActorRatingRequest = (MovieActorRatingRequest) o;
+    return Objects.equals(this.movieId, movieActorRatingRequest.movieId) &&
+        Objects.equals(this.actorId, movieActorRatingRequest.actorId) &&
+        Objects.equals(this.rating, movieActorRatingRequest.rating);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(movieId, rating);
+    return Objects.hash(movieId, actorId, rating);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class MovieRatingRequest {\n");
+    sb.append("class MovieActorRatingRequest {\n");
     
     sb.append("    movieId: ").append(toIndentedString(movieId)).append("\n");
+    sb.append("    actorId: ").append(toIndentedString(actorId)).append("\n");
     sb.append("    rating: ").append(toIndentedString(rating)).append("\n");
     sb.append("}");
     return sb.toString();
