@@ -5,6 +5,7 @@ import pl.wsb.students.api.model.MovieCommentRequest;
 import pl.wsb.students.api.model.MovieRatingRequest;
 import pl.wsb.students.api.model.MovieRequest;
 
+import javax.persistence.Persistence;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,6 +26,7 @@ public class MovieResource {
 
     @POST
     public Response postMovie(MovieRequest body) {
+        Persistence.createEntityManagerFactory("manager").createEntityManager();
         return Response.status(Response.Status.OK).entity("mock call ok...").build();
     }
 

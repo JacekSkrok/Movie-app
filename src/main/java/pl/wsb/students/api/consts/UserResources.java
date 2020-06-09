@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 public class UserResources {
     @POST
     public Response postUser(RegisterUserRequest body) {
+
         return Response.status(Response.Status.OK).entity("zalogowano").build();
     }
 
