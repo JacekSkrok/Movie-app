@@ -6,12 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Movie-app-fx" />
         <module name="MoviesApp" />
-        <module name="Movie-app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Movie-app" target="1.7" />
+      <module name="Movie-app-fx" target="1.7" />
       <module name="MoviesApp" target="1.7" />
     </bytecodeTargetLevel>
   </component>

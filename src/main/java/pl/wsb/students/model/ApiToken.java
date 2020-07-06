@@ -2,6 +2,7 @@ package pl.wsb.students.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "api_token", schema = "movieapp_admin", catalog = "")
@@ -12,6 +13,7 @@ public class ApiToken {
     private String accessToken;
     private String refreshToken;
     private Timestamp validTo;
+    private UserAccount userAccount;
 
     @Id
     @Column(name = "id")
@@ -23,14 +25,25 @@ public class ApiToken {
         this.id = id;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false)
+    public UserAccount getUserAccount() {
+        return this.userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
+
     @Basic
     @Column(name = "created")
     public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
-        this.created = created;
+    public void setCreated(Date created) {
+        this.created = (Timestamp) created;
     }
 
     @Basic
@@ -39,8 +52,8 @@ public class ApiToken {
         return modified;
     }
 
-    public void setModified(Timestamp modified) {
-        this.modified = modified;
+    public void setModified(Date modified) {
+        this.modified = (Timestamp) modified;
     }
 
     @Basic
@@ -69,8 +82,8 @@ public class ApiToken {
         return validTo;
     }
 
-    public void setValidTo(Timestamp validTo) {
-        this.validTo = validTo;
+    public void setValidTo(Date validTo) {
+        this.validTo = (Timestamp) validTo;
     }
 
     @Override

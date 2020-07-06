@@ -9,6 +9,7 @@ public class UserAccountRole {
     private int id;
     private Timestamp created;
     private Timestamp modified;
+    private String name;
 
     @Id
     @Column(name = "id")
@@ -39,6 +40,7 @@ public class UserAccountRole {
     public void setModified(Timestamp modified) {
         this.modified = modified;
     }
+
 
     @Override
     public boolean equals(Object o) {

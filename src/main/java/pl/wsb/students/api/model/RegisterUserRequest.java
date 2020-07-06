@@ -16,6 +16,9 @@ package pl.wsb.students.api.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.validation.ValidationException;
 import javax.validation.constraints.*;
 
 /**
@@ -109,6 +112,12 @@ public class RegisterUserRequest   {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
+  }
+
+  public void validateDate() throws ValidationException {
+    if (StringUtils.isBlank(this.password)) {
+      throw new ValidationException("Please provide password");
+    }
   }
 }
 

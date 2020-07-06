@@ -1,6 +1,7 @@
 package pl.wsb.students.api.consts;
 
 import pl.wsb.students.api.model.MovieLibraryRequest;
+import pl.wsb.students.security.annotation.Authenticate;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 public class LibraryResource {
 
+    @Authenticate
     @POST
     public Response postLibrary(MovieLibraryRequest body) {
         return Response.status(Response.Status.OK).entity("mock call ok...").build();
